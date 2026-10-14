@@ -1,0 +1,77 @@
+[
+  {
+    "feature": "routing",
+    "caption": "Books and films use different source keys in one status column.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Routing','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Routing\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "app.plugins.plugins['bases-checkbox-router'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "order",
+    "caption": "Put read first to change the source of the note with two Boolean properties.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Read first','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Read first\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "app.plugins.plugins['bases-checkbox-router'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "safe-write",
+    "caption": "A stale write is stopped and the row shows a refresh message.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Routing','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Routing\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows'); const f=app.vault.getFileByPath('Bases Checkbox Router/Notes/Arrival.md'); await v.change(f,v.getColumns()[0],{key:'watched',value:true},false); return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "document.querySelector('.bcr-dismiss')?.click(); 'ok'"
+  },
+  {
+    "feature": "source",
+    "caption": "Open a source note from its row. The path and key identify the target.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Routing','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Routing\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "app.plugins.plugins['bases-checkbox-router'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "rules",
+    "caption": "Pro rules select read for notes with type book.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{const p=app.plugins.plugins['bases-checkbox-router']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-checkbox-router-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Type rules','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Type rules\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "app.plugins.plugins['bases-checkbox-router'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "columns",
+    "caption": "Pro adds a Review column that routes reviewed and checked.",
+    "note": "Reading list.base",
+    "eval": "(async()=>{const p=app.plugins.plugins['bases-checkbox-router']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-checkbox-router-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Several columns','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Several columns\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+    "wait": 500,
+    "after": "app.plugins.plugins['bases-checkbox-router'].pro.signOut(); 'ok'"
+  },
+  {
+    "feature": "bases-checkbox-router",
+    "caption": "Compare free routing, type rules and several columns.",
+    "frames": [
+      {
+        "note": "Reading list.base",
+        "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Routing','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Routing\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+        "hold": 1600
+      },
+      {
+        "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Read first','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Read first\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+        "hold": 1600
+      },
+      {
+        "eval": "(async()=>{const p=app.plugins.plugins['bases-checkbox-router']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-checkbox-router-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Type rules','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Type rules\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+        "hold": 1600
+      },
+      {
+        "eval": "(async()=>{const p=app.plugins.plugins['bases-checkbox-router']; p.pro.opts.http=async()=>({status:200,json:{data:{viewer:{login:'demo-reader'},user:{sponsorshipForViewerAsSponsor:{isActive:true,isOneTimePayment:false,tier:{name:'$5 a month',monthlyPriceInCents:500}}}}}}); app.secretStorage.setSecret('bases-checkbox-router-github-token','gho_'+'0'.repeat(36)); await p.pro.refreshNow(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Several columns','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Several columns\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+        "hold": 1800
+      },
+      {
+        "eval": "(async()=>{app.plugins.plugins['bases-checkbox-router'].pro.signOut(); await app.workspace.openLinkText('Bases Checkbox Router/Reading list.base#Routing','',false); let v; for(let i=0;i<100;i++){v=[...app.plugins.plugins['bases-checkbox-router'].views].find(v=>v.root.isConnected&&v.root.offsetParent!==null&&v.config.name===\"Routing\"); if(v&&v.root.dataset.viewName===v.config.name&&v.root.querySelectorAll('tbody tr').length===5)break; await new Promise(r=>setTimeout(r,100));} if(!v||v.root.querySelectorAll('tbody tr').length!==5)throw Error('Missing sample rows');  return 'Five sample rows';})()",
+        "hold": 700
+      }
+    ]
+  }
+]

@@ -1,0 +1,140 @@
+.bcr-view {
+	padding: 20px;
+	overflow: auto;
+	height: 100%;
+}
+
+.bcr-header h3 {
+	margin: 0 0 8px;
+}
+
+.bcr-header p {
+	color: var(--text-muted);
+	margin: 0 0 16px;
+}
+
+.bcr-scroll {
+	overflow-x: auto;
+}
+
+.bcr-view table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.bcr-view th {
+	text-align: left;
+	color: var(--text-muted);
+	font-weight: 600;
+}
+
+.bcr-view th, .bcr-view td {
+	padding: 10px 16px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.bcr-view tbody tr:hover {
+	background: var(--background-secondary);
+}
+
+.bcr-control {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	min-height: 44px;
+	padding-block: 6px;
+}
+
+.bcr-control .checkbox-container {
+	width: 44px;
+	height: 44px;
+	min-width: 44px;
+	min-height: 44px;
+	flex-shrink: 0;
+	border: 2px solid var(--background-modifier-border-hover);
+	border-radius: 8px;
+	background: var(--background-primary);
+	box-shadow: none;
+	position: relative;
+}
+
+.bcr-control .checkbox-container::after {
+	display: none;
+}
+
+.bcr-control .checkbox-container::before {
+	display: block;
+	opacity: 1;
+	content: "";
+	position: absolute;
+	width: 10px;
+	height: 20px;
+	top: 7px;
+	left: 14px;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+	transform: rotate(45deg);
+}
+
+.bcr-control .checkbox-container[aria-checked="true"] {
+	border-color: var(--interactive-accent);
+	background: var(--interactive-accent);
+}
+
+.bcr-control .checkbox-container[aria-checked="true"]::before {
+	border-right: 3px solid var(--text-on-accent);
+	border-bottom: 3px solid var(--text-on-accent);
+}
+
+.bcr-control .checkbox-container[aria-disabled="true"] {
+	opacity: 0.45;
+	cursor: default;
+}
+
+.bcr-source {
+	color: var(--text-accent);
+	background: var(--background-secondary);
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+.bcr-path {
+	font-size: var(--font-smallest);
+	color: var(--text-faint);
+	margin-top: 4px;
+}
+
+.bcr-muted {
+	color: var(--text-muted);
+	font-size: var(--font-small);
+}
+
+.bcr-message {
+	color: var(--text-error);
+	max-width: 340px;
+	font-size: var(--font-small);
+}
+
+.bcr-dismiss {
+	margin-top: 6px;
+	display: block;
+}
+
+.bcr-view a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+}
+
+@media (width <= 600px) {
+	.bcr-view {
+		padding: 8px;
+	}
+
+	.bcr-view th, .bcr-view td {
+		padding: 8px;
+	}
+}

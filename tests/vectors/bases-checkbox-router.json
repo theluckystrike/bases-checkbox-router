@@ -1,0 +1,656 @@
+{
+ "slug": "bases-checkbox-router",
+ "module": "bases-checkbox-router/src/router",
+ "function": "router acceptance operations",
+ "cases": [
+  {
+   "name": "movie false",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": false
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": {
+    "key": "watched",
+    "value": false
+   }
+  },
+  {
+   "name": "book true",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "read": true
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": {
+    "key": "read",
+    "value": true
+   }
+  },
+  {
+   "name": "false has priority",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": false,
+      "read": true
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": {
+    "key": "watched",
+    "value": false
+   }
+  },
+  {
+   "name": "text is skipped",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": "false",
+      "read": true
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": {
+    "key": "read",
+    "value": true
+   }
+  },
+  {
+   "name": "missing keys",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {},
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": null
+  },
+  {
+   "name": "null skipped",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": null,
+      "read": false
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": {
+    "key": "read",
+    "value": false
+   }
+  },
+  {
+   "name": "number skipped",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": 1
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": null
+  },
+  {
+   "name": "list skipped",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "watched": [
+       true
+      ]
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": null
+  },
+  {
+   "name": "case sensitive",
+   "args": [
+    {
+     "kind": "select",
+     "fm": {
+      "Watched": true
+     },
+     "keys": [
+      "watched",
+      "read"
+     ]
+    }
+   ],
+   "expected": null
+  },
+  {
+   "name": "check movie only watched",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "watched": false
+     },
+     "prior": {
+      "key": "watched",
+      "value": false
+     },
+     "next": true
+    }
+   ],
+   "expected": {
+    "status": "written",
+    "fm": {
+     "watched": true
+    }
+   }
+  },
+  {
+   "name": "clear book only read",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "read": true
+     },
+     "prior": {
+      "key": "read",
+      "value": true
+     },
+     "next": false
+    }
+   ],
+   "expected": {
+    "status": "written",
+    "fm": {
+     "read": false
+    }
+   }
+  },
+  {
+   "name": "preserve text watched",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "watched": "false",
+      "read": true
+     },
+     "prior": {
+      "key": "read",
+      "value": true
+     },
+     "next": false
+    }
+   ],
+   "expected": {
+    "status": "written",
+    "fm": {
+     "watched": "false",
+     "read": false
+    }
+   }
+  },
+  {
+   "name": "changed prior value",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "watched": true
+     },
+     "prior": {
+      "key": "watched",
+      "value": false
+     },
+     "next": true
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {
+     "watched": true
+    }
+   }
+  },
+  {
+   "name": "deleted selected key",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "read": true
+     },
+     "prior": {
+      "key": "watched",
+      "value": false
+     },
+     "next": true
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {
+     "read": true
+    }
+   }
+  },
+  {
+   "name": "selected became text",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "watched": "false",
+      "read": true
+     },
+     "prior": {
+      "key": "watched",
+      "value": false
+     },
+     "next": true
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {
+     "watched": "false",
+     "read": true
+    }
+   }
+  },
+  {
+   "name": "earlier key added",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "watched": false,
+      "read": true
+     },
+     "prior": {
+      "key": "read",
+      "value": true
+     },
+     "next": false
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {
+     "watched": false,
+     "read": true
+    }
+   }
+  },
+  {
+   "name": "missing stays missing",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {},
+     "prior": {
+      "key": "watched",
+      "value": false
+     },
+     "next": true
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {}
+   }
+  },
+  {
+   "name": "own constructor name",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "constructor": false
+     },
+     "prior": {
+      "key": "constructor",
+      "value": false
+     },
+     "next": true,
+     "column": {
+      "label": "Status",
+      "keys": [
+       "constructor"
+      ],
+      "rules": []
+     }
+    }
+   ],
+   "expected": {
+    "status": "written",
+    "fm": {
+     "constructor": true
+    }
+   }
+  },
+  {
+   "name": "double tap while pending",
+   "args": [
+    {
+     "kind": "pending"
+    }
+   ],
+   "expected": {
+    "calls": 1,
+    "second": false,
+    "pending": 0
+   }
+  },
+  {
+   "name": "error refreshes before unlock",
+   "args": [
+    {
+     "kind": "error"
+    }
+   ],
+   "expected": {
+    "refreshed": true,
+    "pending": 0
+   }
+  },
+  {
+   "name": "type rule exact match",
+   "args": [
+    {
+     "kind": "rules",
+     "fm": {
+      "type": "book"
+     },
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": [
+      "book=read",
+      "movie=watched"
+     ]
+    }
+   ],
+   "expected": [
+    "read"
+   ]
+  },
+  {
+   "name": "unmatched type uses free order",
+   "args": [
+    {
+     "kind": "rules",
+     "fm": {
+      "type": "article"
+     },
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": [
+      "book=read"
+     ]
+    }
+   ],
+   "expected": [
+    "watched",
+    "read"
+   ]
+  },
+  {
+   "name": "malformed rule ignored",
+   "args": [
+    {
+     "kind": "rules",
+     "fm": {
+      "type": "book"
+     },
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": [
+      "book=",
+      "bad"
+     ]
+    }
+   ],
+   "expected": [
+    "watched",
+    "read"
+   ]
+  },
+  {
+   "name": "first matching rule wins",
+   "args": [
+    {
+     "kind": "rules",
+     "fm": {
+      "type": "book"
+     },
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": [
+      "book=read",
+      "book=watched"
+     ]
+    }
+   ],
+   "expected": [
+    "read"
+   ]
+  },
+  {
+   "name": "free ignores paid config",
+   "args": [
+    {
+     "kind": "columns",
+     "options": {
+      "keys": [
+       "watched",
+       "read"
+      ],
+      "rules": [
+       "book=read"
+      ],
+      "extra": [
+       "Review=reviewed,checked"
+      ],
+      "pro": false
+     }
+    }
+   ],
+   "expected": [
+    {
+     "label": "Status",
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": []
+    }
+   ]
+  },
+  {
+   "name": "Pro columns on",
+   "args": [
+    {
+     "kind": "columns",
+     "options": {
+      "keys": [
+       "watched",
+       "read"
+      ],
+      "rules": [
+       "book=read"
+      ],
+      "extra": [
+       "Review=reviewed,checked"
+      ],
+      "pro": true
+     }
+    }
+   ],
+   "expected": [
+    {
+     "label": "Status",
+     "keys": [
+      "watched",
+      "read"
+     ],
+     "rules": [
+      "book=read"
+     ]
+    },
+    {
+     "label": "Review",
+     "keys": [
+      "reviewed",
+      "checked"
+     ],
+     "rules": []
+    }
+   ]
+  },
+  {
+   "name": "key list trims and removes duplicates",
+   "args": [
+    {
+     "kind": "keys",
+     "value": [
+      " watched ",
+      "read",
+      "watched",
+      false,
+      ""
+     ]
+    }
+   ],
+   "expected": [
+    "watched",
+    "read"
+   ]
+  },
+  {
+   "name": "phone row identifies the source note and key",
+   "args": [
+    {
+     "kind": "view",
+     "fm": "read: false"
+    }
+   ],
+   "expected": {
+    "key": "read",
+    "label": "Movie: Status, read",
+    "disabled": "false",
+    "href": "Movie.md",
+    "opened": [
+     "Movie.md",
+     false
+    ]
+   }
+  },
+  {
+   "name": "inactive row keeps a source note link",
+   "args": [
+    {
+     "kind": "view",
+     "fm": "type: idea"
+    }
+   ],
+   "expected": {
+    "key": "",
+    "label": "Movie: Status, No valid key",
+    "disabled": "true",
+    "href": "Movie.md",
+    "opened": [
+     "Movie.md",
+     false
+    ]
+   }
+  },
+  {
+   "name": "type change selects a different key and stops the write",
+   "args": [
+    {
+     "kind": "write",
+     "fm": {
+      "type": "movie",
+      "watched": false,
+      "read": true
+     },
+     "column": {
+      "label": "Status",
+      "keys": [
+       "watched",
+       "read"
+      ],
+      "rules": [
+       "book=read",
+       "movie=watched"
+      ]
+     },
+     "prior": {
+      "key": "read",
+      "value": true
+     },
+     "next": false
+    }
+   ],
+   "expected": {
+    "status": "stale",
+    "fm": {
+     "type": "movie",
+     "watched": false,
+     "read": true
+    }
+   }
+  }
+ ]
+}

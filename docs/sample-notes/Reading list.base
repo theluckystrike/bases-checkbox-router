@@ -1,0 +1,39 @@
+filters:
+  and:
+    - file.inFolder("Bases Checkbox Router/Notes")
+views:
+  - type: bases-checkbox-router
+    name: Routing
+    routerKeys:
+      - watched
+      - read
+  - type: bases-checkbox-router
+    name: Read first
+    routerKeys:
+      - read
+      - watched
+  - type: bases-checkbox-router
+    name: Type rules
+    routerKeys:
+      - watched
+      - read
+    routerRules:
+      - book=read
+      - movie=watched
+  - type: bases-checkbox-router
+    name: Several columns
+    routerKeys:
+      - watched
+      - read
+    routerRules:
+      - book=read
+      - movie=watched
+    routerColumns:
+      - Review=reviewed,checked
+  - type: table
+    name: Source properties
+    order:
+      - file.name
+      - note.type
+      - note.watched
+      - note.read
