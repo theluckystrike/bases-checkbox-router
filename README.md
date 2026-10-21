@@ -58,7 +58,9 @@ Use one entry per column. Commas separate keys and the first equals sign separat
 
 ## Install
 
-Use Obsidian 1.13.4 or later and enable the core Bases plugin. For manual installation, copy `main.js`, `manifest.json` and `styles.css` from a release into `<vault>/.obsidian/plugins/bases-checkbox-router/`. Then enable Bases Checkbox Router under Community plugins. This source build does not establish a community directory listing.
+Use Obsidian 1.13.4 or later and enable the core Bases plugin. Open Settings, then Community plugins, then Browse, and search for "Bases Checkbox Router". Select Install, then Enable.
+
+For manual installation, copy `main.js`, `manifest.json` and `styles.css` from a release into `<vault>/.obsidian/plugins/bases-checkbox-router/`. Then enable Bases Checkbox Router under Community plugins.
 
 ## Usage
 
@@ -71,6 +73,8 @@ Use Obsidian 1.13.4 or later and enable the core Bases plugin. For manual instal
 Create Boolean properties in the source note first. The router edits existing values. It does not edit a formula result or invert a formula. Group headings and extra plain property columns are outside this version's scope.
 
 ## Settings
+
+After a minor or major update, this plugin opens one What's new tab in the background. The tab and settings card suggest other NoteMods plugins and Zovo Chat and link to notemods.com for feedback ([privacy](https://notemods.com/privacy/)). The tab sends no data. Turn the tab off in Settings.
 
 The base toolbar holds Property keys in order, Note type rules (Pro), and Extra columns (Pro). Bases saves these options per view. The plugin settings tab holds GitHub sign in, sponsorship status, Refresh, and Sign out. The free router needs no account.
 
