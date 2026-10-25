@@ -1,5 +1,6 @@
 {
 	"name": "bases-checkbox-router",
+	"repository": {"type": "git", "url": "theluckystrike/bases-checkbox-router.git"},
 	"version": "1.1.0",
 	"private": true,
 	"description": "Edit different Boolean properties through one checkbox column with a source key shown for each note.",
