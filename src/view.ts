@@ -1,6 +1,6 @@
 import { BasesView, Keymap, Notice, ToggleComponent, getFrontMatterInfo, parseYaml, type BasesAllOptions, type QueryController, type TFile } from 'obsidian';
 import type BasesCheckboxRouterPlugin from './main';
-import { isPro, onProChange } from './pro';
+import { isPro, onProChange, proNotice, PRO_OPTIONS } from './pro';
 import { applyChange, columns, keysFrom, routeKeys, select, StaleWrite, type Column, type Selection } from './router';
 
 export function viewOptions(): BasesAllOptions[] {
@@ -19,6 +19,8 @@ export class RouterView extends BasesView {
 	private refreshQueue: Promise<void> = Promise.resolve();
 	private alive = true;
 	private readonly messages = new Map<string, string>();
+	/** The Pro view options of the last draw. null before the first draw. */
+	private proOptions: string | null = null;
 	readonly root: HTMLElement;
 	constructor(controller: QueryController, container: HTMLElement, readonly plugin: BasesCheckboxRouterPlugin) {
 		super(controller);
@@ -64,7 +66,11 @@ export class RouterView extends BasesView {
 		const header = this.root.createDiv({ cls: 'bcr-header' });
 		header.createEl('h3', { text: 'Routed checkboxes' });
 		header.createEl('p', { text: `${this.rows.length} notes · First Boolean key in the saved order` });
-		if (!isPro() && (keysFrom(this.config.get('routerRules')).length || keysFrom(this.config.get('routerColumns')).length)) header.createEl('p', { text: 'Pro is off. Saved rules and extra columns are inactive.', cls: 'bcr-muted' });
+		const rules = keysFrom(this.config.get('routerRules')); const extra = keysFrom(this.config.get('routerColumns'));
+		if (!isPro() && (rules.length || extra.length)) header.createEl('p', { text: 'Pro is off. Saved rules and extra columns are inactive.', cls: 'bcr-muted' });
+		// A free user who enters a Pro view option gets the Pro notice once for each change. Opening a view does not show it.
+		const proOptions = JSON.stringify([rules, extra]); const prior = this.proOptions; this.proOptions = proOptions;
+		if (!isPro() && prior !== null && proOptions !== prior && (rules.length || extra.length)) proNotice(PRO_OPTIONS);
 		if (!this.rows.length) { this.root.createEl('p', { text: 'No notes in this base. Check the base filters.' }); return; }
 		const table = this.root.createDiv({ cls: 'bcr-scroll' }).createEl('table');
 		const head = table.createEl('thead').createEl('tr');

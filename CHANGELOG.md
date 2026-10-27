@@ -1,5 +1,11 @@
 # bases-checkbox-router
 
+## 1.1.1
+
+### Patch Changes
+
+- 977834a: Entering Note type rules (Pro) or Extra columns (Pro) in the view options now shows how to get Pro, with a Sponsor on GitHub button. The options stay inactive until Pro is on.
+
 ## 1.1.0
 
 ### Minor Changes
