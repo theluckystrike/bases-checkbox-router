@@ -11,7 +11,7 @@ import { bindPro, resetPro, PRO_OPTIONS } from '../src/pro';
 
 // A free user who enters Note type rules (Pro) or Extra columns (Pro) in the view options gets the shared Pro notice
 // with the "Sponsor on GitHub" button. The rules and the extra columns stay inactive and no note changes.
-const PITCH = 'Sponsor on GitHub, then sign in from the plugin settings.';
+const PITCH = 'One payment turns on Pro in every NoteMods plugin. Sponsor on GitHub, then sign in from the plugin settings.';
 
 function fakePro(pro: boolean): SponsorsManager {
 	return {
