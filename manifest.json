@@ -1,7 +1,7 @@
 {
 	"id": "bases-checkbox-router",
 	"name": "Bases Checkbox Router",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"minAppVersion": "1.13.4",
 	"description": "Edit a checkbox property of any note in one Bases column. Each toggle goes to the first Boolean property that the note has, and the column shows its source key. The table keeps one checkbox for each note.",
 	"author": "Michael Lip",
